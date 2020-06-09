@@ -1,11 +1,14 @@
 package edu.ucar.cisl.metadatasearch.repository;
 
+import edu.ucar.cisl.metadatasearch.model.Result;
+import edu.ucar.cisl.metadatasearch.model.SearchResults;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.NoOpResponseParser;
 import org.apache.solr.client.solrj.impl.XMLResponseParser;
 import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +29,7 @@ public class SearchRepository {
         return results;
     }
 
-    public List getAll() {
+    public SearchResults getAll() {
 
         String urlString = "http://localhost:8983/solr/metadata";
         HttpSolrClient solr = new HttpSolrClient.Builder(urlString).build();
@@ -35,17 +38,61 @@ public class SearchRepository {
         SolrQuery query = new SolrQuery();
         query.set("q", "*:*");
 
-        QueryResponse response = null;
+        QueryResponse queryResponse = null;
         try {
-            response = solr.query(query);
+            queryResponse = solr.query(query);
         } catch (SolrServerException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        SolrDocumentList docList = response.getResults();
+        SolrDocumentList docList = queryResponse.getResults();
 
-        return docList;
+        // Get count of results for SearchResults
+        Long resultCount = docList.getNumFound();
+
+        // Get List of Result Objects for SearchResults.  This is more work so needs methods to break it up
+        List<Result> resultList = getResultList(queryResponse);
+
+        SearchResults searchResults = new SearchResults(resultCount, resultList);
+
+        return searchResults;
     };
+
+    // Convert queryResponse to List of Result objects
+    protected List<Result> getResultList(QueryResponse queryResponse) {
+
+        SolrDocumentList solrResults = queryResponse.getResults();
+
+        List<Result> resultList = new ArrayList<Result>();
+
+        for (SolrDocument document : solrResults) {
+
+            // Create our Result from Solr info
+            Result result = new Result();
+            result.setTitle(getSolrDocumentFieldValue(document, "title"));
+            result.setDescription(getSolrDocumentFieldValue(document, "description"));
+
+            resultList.add(result);
+        }
+
+        return resultList;
+    }
+
+    // Given SolrDocument and field name, pull out field value
+    protected String getSolrDocumentFieldValue(SolrDocument document, String field) {
+
+        String fieldValue;
+
+        Object value = document.getFieldValue(field);
+
+        if (value == null) {
+            fieldValue = "";
+        } else {
+            fieldValue = value.toString();
+        }
+
+        return fieldValue;
+    }
 }

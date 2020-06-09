@@ -1,12 +1,11 @@
 package edu.ucar.cisl.metadatasearch.controller;
 
+import edu.ucar.cisl.metadatasearch.model.SearchResults;
 import edu.ucar.cisl.metadatasearch.repository.SearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Controller
 public class HomeController
@@ -22,14 +21,13 @@ public class HomeController
         return "index";
     }
 
-    @RequestMapping(value = "/read")
+    @RequestMapping(value = "/search")
     public String read(Model model) {
 
-        List results = this.searchRepository.getAll();
-        model.addAttribute("results", results);
-        return "results";
+        SearchResults searchResults = this.searchRepository.getAll();
+        model.addAttribute("searchResults", searchResults);
 
+        return "display-results";
     }
-
 
 }

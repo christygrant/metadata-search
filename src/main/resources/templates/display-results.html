@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Metadata Search</title>
+
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+<body>
+    <h3>
+        Query Metadata
+    </h3>
+
+    <h4>Results</h4>
+
+        <p>
+            Result Count: <span th:text="${searchResults.resultCount}"></span>
+        </p>
+
+        <ul>
+        <li th:each="result : ${searchResults.results}">
+            <p>
+            Title: <span th:text="${result.title}"></span><br>
+            Description: <span th:text="${result.description}"></span>
+            </p>
+        </li>
+        </ul>
+
+</body>
+</html>
