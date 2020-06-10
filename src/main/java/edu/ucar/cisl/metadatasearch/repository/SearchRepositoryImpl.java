@@ -52,6 +52,13 @@ public class SearchRepositoryImpl implements SearchRepository{
             e.printStackTrace();
         }
 
+        SearchResultsImpl searchResults = createSearchResults(queryResponse);
+
+        return searchResults;
+    }
+
+    private SearchResultsImpl createSearchResults(QueryResponse queryResponse) {
+
         SolrDocumentList docList = queryResponse.getResults();
 
         // Get count of results for SearchResultsImpl
@@ -60,10 +67,8 @@ public class SearchRepositoryImpl implements SearchRepository{
         // Get List of Result Objects for SearchResultsImpl.  This is more work so needs methods to break it up
         List<Result> resultList = getResultList(queryResponse);
 
-        SearchResultsImpl searchResults = new SearchResultsImpl(resultCount, resultList);
-
-        return searchResults;
-    };
+        return new SearchResultsImpl(resultCount, resultList);
+    }
 
     // Convert queryResponse to List of Result objects
     protected List<Result> getResultList(QueryResponse queryResponse) {
