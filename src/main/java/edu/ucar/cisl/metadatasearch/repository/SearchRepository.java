@@ -29,14 +29,17 @@ public class SearchRepository {
         return results;
     }
 
-    public SearchResults getAll() {
+    public SearchResults getQueryResults(String queryText) {
+
+        // Default is 10 if not set
+        int MAX_ROWS = 100;
 
         String urlString = "http://localhost:8983/solr/metadata";
         HttpSolrClient solr = new HttpSolrClient.Builder(urlString).build();
       //  solr.setParser(new NoOpResponseParser());
 
-        SolrQuery query = new SolrQuery();
-        query.set("q", "*:*");
+        SolrQuery query = new SolrQuery().setRows(MAX_ROWS);
+        query.set("q", queryText);
 
         QueryResponse queryResponse = null;
         try {

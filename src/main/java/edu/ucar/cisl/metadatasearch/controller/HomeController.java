@@ -5,7 +5,10 @@ import edu.ucar.cisl.metadatasearch.repository.SearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController
@@ -21,10 +24,23 @@ public class HomeController
         return "index";
     }
 
-    @RequestMapping(value = "/search")
-    public String read(Model model) {
+    @ModelAttribute("command")
+    public SearchCommand setupSearchCommand() {
+        return new SearchCommand();
+    }
 
-        SearchResults searchResults = this.searchRepository.getAll();
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String search() {
+
+        return "search-form";
+    }
+
+    @RequestMapping(value = "/searchOutput", method = RequestMethod.POST)
+    public String getResults(@ModelAttribute("command") SearchCommand searchCommand,
+                             BindingResult bindingResult, Model model) {
+
+        SearchResults searchResults = this.searchRepository.getQueryResults(searchCommand.getQueryText());
         model.addAttribute("searchResults", searchResults);
 
         return "display-results";
