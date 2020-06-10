@@ -2,23 +2,10 @@ package edu.ucar.cisl.metadatasearch.model;
 
 import java.util.List;
 
-public class SearchResults implements SearchResultsInterface {
+public interface SearchResults {
 
-    Long resultCount;
-    List<Result> results;
+        Long getResultCount();
 
-    public SearchResults(Long resultCount, List<Result> results) {
-        this.resultCount = resultCount;
-        this.results = results;
-    }
+        List<Result> getResults();
 
-    public Long getResultCount() {
-        return this.resultCount;
-    }
-
-    public List<Result> getResults() {
-        return this.results;
-    }
-
-    // No Setters, just getters.  Must use constructor to set.
 }

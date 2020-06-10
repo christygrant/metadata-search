@@ -7,7 +7,7 @@
 <body>
 <h1>Search Form</h1>
 
-<form action="#" th:action="@{/searchOutput}" th:object="${command}" method="post">
+<form action="#" th:action="@{/searchOutput}" th:object="${command}" method="get">
 
     <p>Enter Query: <input type="text" th:field="*{queryText}" /></p>
 
