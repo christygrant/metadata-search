@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController
@@ -42,13 +43,15 @@ public class HomeController
     }
 
     @RequestMapping(value = "/searchOutput", method = RequestMethod.GET)
-    public String getResults(@ModelAttribute("command") SearchCommand searchCommand,
-                             BindingResult bindingResult, Model model) {
+    public ModelAndView getResults(@ModelAttribute("command") SearchCommand searchCommand,
+                             BindingResult bindingResult) {
+
+        ModelAndView modelAndView = new ModelAndView("display-results");
 
         SearchResults searchResults = this.searchRepository.getQueryResults(searchCommand.getQueryText());
-        model.addAttribute("searchResults", searchResults);
+        modelAndView.addObject("searchResults", searchResults);
 
-        return "display-results";
+        return modelAndView;
     }
 
 }

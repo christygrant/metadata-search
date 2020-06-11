@@ -7,5 +7,4 @@ public interface SearchResults {
         Long getResultCount();
 
         List<Result> getResults();
-
 }
