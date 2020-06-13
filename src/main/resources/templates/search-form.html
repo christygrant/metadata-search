@@ -3,16 +3,22 @@
 <head>
     <title>Search Form</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <div th:insert="fragments/header-includes :: bootstrap"></div>
 </head>
 <body>
+
+<div class="container">
 <h1>Search Form</h1>
 
 <form action="#" th:action="@{/searchOutput}" th:object="${command}" method="get">
 
     <p>Enter Query: <input type="text" th:field="*{queryText}" /></p>
 
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    <p><input type="submit" class="btn btn-info" value="Submit" /> <input type="reset" class="btn btn-info" value="Reset" /></p>
 </form>
+
+</div> <!-- container -->
 
 </body>
 </html>

@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>Metadata Search</title>
 
+    <div th:insert="fragments/header-includes :: bootstrap"></div>
+
     <link rel="stylesheet" th:href="@{/css/main.css}" />
 </head>
 <body>
-    <h4>
-        <a href="http://localhost:8080/search">Search Form</a>
-    </h4>
+<div class="container">
+<a href="http://localhost:8080/search">Search Form</a>
+
 
     <h3>Results</h3>
 
@@ -26,5 +28,6 @@
         </li>
         </ul>
 
+</div> <!-- container -->
 </body>
 </html>
