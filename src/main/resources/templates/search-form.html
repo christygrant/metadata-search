@@ -4,9 +4,15 @@
     <title>Search Form</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <div th:insert="fragments/header-includes :: bootstrap"></div>
+    <div th:insert="fragments/includes :: bootstrap"></div>
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="#">
+        <img th:src="@{images/ucarncarstack-ncarspellout-blue.png}" class="logo">
+    </a>
+</nav>
 
 <div class="container">
 <h1>Search Form</h1>
@@ -18,7 +24,11 @@
     <p><input type="submit" class="btn btn-info" value="Submit" /> <input type="reset" class="btn btn-info" value="Reset" /></p>
 </form>
 
+
 </div> <!-- container -->
+
+<div th:insert="fragments/includes :: footer"></div>
+
 
 </body>
 </html>
