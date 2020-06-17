@@ -1,34 +1,50 @@
 <!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="base :: fragments/header(~{::title})"> -->
 <head>
-    <title>Search Form</title>
+
+    <title>Test Solr Search</title>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <div th:insert="fragments/includes :: bootstrap"></div>
+    <div th:insert="~{fragments/header :: header}"></div>
+
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="#">
-        <img th:src="@{images/ucarncarstack-ncarspellout-blue.png}" class="logo">
-    </a>
-</nav>
-
 <div class="container">
+
 <h1>Search Form</h1>
 
 <form action="#" th:action="@{/searchOutput}" th:object="${command}" method="get">
 
     <p>Enter Query: <input type="text" th:field="*{queryText}" /></p>
 
-    <p><input type="submit" class="btn btn-info" value="Submit" /> <input type="reset" class="btn btn-info" value="Reset" /></p>
+    <p><input type="submit" class="btn btn-info" value="Submit" /> </p>
 </form>
 
+    <div th:if= "${searchResults != null}">
+
+    <h3>Results</h3>
+
+    <p>
+        Result Count: <span th:text="${searchResults.resultCount}"></span>
+    </p>
+
+    <ul>
+        <li th:each="result : ${searchResults.results}">
+            <p>
+                Title: <span th:text="${result.title}"></span><br>
+                Description: <span th:text="${result.description}"></span>
+            </p>
+        </li>
+    </ul>
+    </div>
 
 </div> <!-- container -->
-
-<div th:insert="fragments/includes :: footer"></div>
-
+<div th:insert="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>

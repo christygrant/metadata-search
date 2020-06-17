@@ -46,7 +46,7 @@ public class HomeController
     public ModelAndView getResults(@ModelAttribute("command") SearchCommand searchCommand,
                              BindingResult bindingResult) {
 
-        ModelAndView modelAndView = new ModelAndView("display-results");
+        ModelAndView modelAndView = new ModelAndView("search-form");
 
         SearchResults searchResults = this.searchRepository.getQueryResults(searchCommand.getQueryText());
         modelAndView.addObject("searchResults", searchResults);
