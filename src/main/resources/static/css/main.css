@@ -2,6 +2,11 @@ h3{
     color:purple;
 }
 
+.header {
+    padding: 20px;
+    background-color: #e3f2fd;
+}
+
 .logo {
     height: 50px;
     background-color: #e3f2fd;
@@ -16,5 +21,5 @@ h3{
 }
 
 .navbar {
-    background-color: #e3f2fd;
+    background-color: powderblue;
 }

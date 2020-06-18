@@ -16,9 +16,14 @@
 
 <div class="container">
 
-<h1>Search Form</h1>
-
-<form action="#" th:action="@{/searchOutput}" th:object="${command}" method="get">
+<h3>Search Form</h3>
+    <div>Enter search criteria. For example:<br>
+        *:* <br>
+        doi:*  <br>
+        title:Global*
+    </div>
+    <br>
+<form action="#" th:action="@{/search.html}" th:object="${command}" method="get">
 
     <p>Enter Query: <input type="text" th:field="*{queryText}" /></p>
 

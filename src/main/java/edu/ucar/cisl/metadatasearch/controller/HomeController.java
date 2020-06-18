@@ -22,7 +22,7 @@ public class HomeController
         this.searchRepository = searchRepository;
     }
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/index.html")
     public String index(Model model) {
 
         model.addAttribute("message", "You rock!");
@@ -35,14 +35,7 @@ public class HomeController
         return new SearchCommand();
     }
 
-
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String search() {
-
-        return "search-form";
-    }
-
-    @RequestMapping(value = "/searchOutput", method = RequestMethod.GET)
+    @RequestMapping(value = "/search.html", method = RequestMethod.GET)
     public ModelAndView getResults(@ModelAttribute("command") SearchCommand searchCommand,
                              BindingResult bindingResult) {
 
