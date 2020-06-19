@@ -27,25 +27,37 @@
 
     <p><strong>Enter Query:</strong>&nbsp;&nbsp;<input type="text" th:field="*{queryText}" /></p>
 
-    <p><input type="submit" class="btn btn-info" value="Submit" /> </p>
+    <p><input type="submit" class="btn btn-info" value="Search" /> </p>
 </form>
 
-    <div th:if= "${searchResults != null}">
+  <!-- DEBUG
+    <div th:if="${searchResults==null}">
+        It's empty
+    </div>
+    <div th:if="${searchResults!=null}">
+        NOT empty.
+    </div>
+    -->
 
-    <h3>Results</h3>
+    <div th:if="${not #strings.isEmpty(searchResults)}">
 
-    <p>
+        <br>
+        <h3>Results</h3>
+
+        <p>
         Result Count: <span th:text="${searchResults.resultCount}"></span>
-    </p>
+        </p>
 
-    <ul>
-        <li th:each="result : ${searchResults.results}">
+        </th:block>
+
+        <ul>
+            <li th:each="result : ${searchResults.results}">
             <p>
                 Title: <span th:text="${result.title}"></span><br>
                 Description: <span th:text="${result.description}"></span>
             </p>
-        </li>
-    </ul>
+            </li>
+        </ul>
     </div>
 
 </div> <!-- container -->
