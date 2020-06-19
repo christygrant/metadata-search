@@ -41,9 +41,11 @@ public class HomeController
 
         ModelAndView modelAndView = new ModelAndView("search-form");
 
-        if (searchCommand.getQueryText() != null) {
+        String queryText = searchCommand.getQueryText();
 
-            SearchResults searchResults = this.searchRepository.getQueryResults(searchCommand.getQueryText());
+        if (queryText != null) {
+
+            SearchResults searchResults = this.searchRepository.getQueryResults(queryText);
             modelAndView.addObject("searchResults", searchResults);
         }
 
