@@ -4,6 +4,7 @@ public class Result {
 
     private String title;
     private String description;
+    private String authoritativeSourceUrl;
 
     public String getTitle() {
         return title;
@@ -20,4 +21,14 @@ public class Result {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getAuthoritativeSourceUrl() {
+        return authoritativeSourceUrl;
+    }
+
+    public void setAuthoritativeSourceUrl(String authoritativeSourceUrl) {
+        this.authoritativeSourceUrl = authoritativeSourceUrl;
+    }
+
+
 }

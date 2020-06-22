@@ -50,14 +50,19 @@
 
         </th:block>
 
-        <ul>
-            <li th:each="result : ${searchResults.results}">
-            <p>
-                Title: <span th:text="${result.title}"></span><br>
-                Description: <span th:text="${result.description}"></span>
-            </p>
-            </li>
-        </ul>
+        <table class="table table-borderless">
+            <tbody>
+            <tr th:each="result : ${searchResults.results}">
+            <td>
+                <a th:href="${result.authoritativeSourceUrl}"><span th:text="${result.title}"></span></a> <br>
+                <span th:text="${result.description}"></span>
+            </td>
+            </tr>
+            </tbody>
+        </table>>
+
+
+
     </div>
 
 </div> <!-- container -->

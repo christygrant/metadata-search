@@ -91,6 +91,7 @@ public class SearchRepositoryImpl implements SearchRepository{
 
         result.setTitle(getSolrDocumentFieldValue(document, "title"));
         result.setDescription(getSolrDocumentFieldValue(document, "description"));
+        result.setAuthoritativeSourceUrl(getSolrDocumentFieldValue(document, "authoritative_source_url"));
 
         return result;
     }
