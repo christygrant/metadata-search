@@ -50,7 +50,14 @@
 
         </th:block>
 
-        <table class="table table-borderless">
+        <table id="resultTable" class="table ">
+
+            <thead>
+            <tr>
+                <th>Sort</th>
+            </tr>
+            </thead>
+
             <tbody>
             <tr th:each="result : ${searchResults.results}">
             <td>
@@ -60,13 +67,22 @@
             </tr>
             </tbody>
         </table>>
-
-
-
     </div>
 
 </div> <!-- container -->
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#resultTable').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+
+<!--
 <div th:insert="~{fragments/footer :: footer}"></div>
+-->
+
 
 </body>
 </html>
